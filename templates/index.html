@@ -41,8 +41,10 @@
         {% if prediction %}
             <div class="alert alert-success mt-4" role="alert">
                 Prediction: {{ prediction }}<br>
+                {% if 'Unknown' not in prediction %}
                 Confidence: {{ confidence }}<br>
-                <img src="data:image/png;base64,{{image}}" alt="uploaded image" class="img-thumbnail">
+                {% endif %}
+                <img src="data:image/png;base64,{{image}}" alt="uploaded image" class="img-thumbnail" width="275" height="475"">
             </div>
         {% endif %}
         {% if error %}

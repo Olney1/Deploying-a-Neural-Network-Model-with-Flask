@@ -7,7 +7,7 @@ from io import BytesIO
 app = Flask(__name__)
 
 # Load the learner
-learn = load_learner('human_dog_pigeon_baby_model.pkl')
+learn = load_learner('human_dog_pigeon_baby_model_v2.pkl')
 
 @app.route('/', methods=['GET', 'POST'])
 def predict():
@@ -30,10 +30,13 @@ def predict():
                 error = 'Invalid file type. We only accept jpg, png or jpeg image files.'
             else:
                 img = PILImage.create(file.read())
-                pred_class,pred_idx,outputs = learn.predict(img)
-                prediction = str(pred_class)
-                confidence_raw_format = str(outputs[pred_idx.item()])
-                confidence = "{:.2%}".format(outputs[pred_idx.item()])
+                pred_class, pred_idx, outputs = learn.predict(img)
+
+                confidence_score = outputs[pred_idx.item()].item()
+                if confidence_score < 0.95:
+                    prediction = 'Unknown'
+                else:
+                    prediction = str(pred_class)
 
                 # Here we modify the prediction if it's equal to 'babies'
                 if prediction == 'babies':
@@ -44,6 +47,8 @@ def predict():
                     prediction = 'Human'
                 if prediction == 'dog':
                     prediction = 'Dog'
+                
+                confidence = "{:.2%}".format(confidence_score)
 
                 # convert image into a base64 format
                 buf = BytesIO()
