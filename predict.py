@@ -33,20 +33,16 @@ def predict():
                 pred_class, pred_idx, outputs = learn.predict(img)
 
                 confidence_score = outputs[pred_idx.item()].item()
-                if confidence_score < 0.95:
+                if confidence_score < 0.98:
                     prediction = 'Unknown'
                 else:
                     prediction = str(pred_class)
 
-                # Here we modify the prediction if it's equal to 'babies'
+                # Here we modify the prediction if it's equal to 'babies' just because that was how the model was trained.
                 if prediction == 'babies':
                     prediction = 'Baby'
-                if prediction == 'pigeon':
-                    prediction = 'Pigeon'
-                if prediction == 'human':
-                    prediction = 'Human'
-                if prediction == 'dog':
-                    prediction = 'Dog'
+                else:
+                    prediction = prediction.capitalize()
                 
                 confidence = "{:.2%}".format(confidence_score)
 
