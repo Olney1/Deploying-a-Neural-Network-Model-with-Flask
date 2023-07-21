@@ -31,9 +31,13 @@ def predict():
             else:
                 img = PILImage.create(file.read())
                 pred_class, pred_idx, outputs = learn.predict(img)
-
+                
                 confidence_score = outputs[pred_idx.item()].item()
-                if confidence_score < 0.98:
+                # Here it is useful to show the confidence score as we test the app with different images. Comment this line out when happy.
+                print(confidence_score)
+
+                # Here we set the confidence score in order to determine the cut-off point of confidence for the prediction to default to 'Unknown' for images the model has not been trained on or not confident about.
+                if confidence_score < 0.97:
                     prediction = 'Unknown'
                 else:
                     prediction = str(pred_class)
