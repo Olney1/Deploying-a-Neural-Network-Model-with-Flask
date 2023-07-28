@@ -47,6 +47,13 @@ def predict():
                     prediction = 'Baby'
                 else:
                     prediction = prediction.capitalize()
+
+                # Here we modify the prediction if it's equal to 'Human' just because that was how the model was trained with images of adults but it was wrongly labelled 'human'.
+                # In a real app for production, we would just retrain the model with the right labels.
+                if prediction == 'Human':
+                    prediction = 'Adult'
+                else:
+                    prediction = prediction.capitalize()
                 
                 confidence = "{:.2%}".format(confidence_score)
 

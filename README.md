@@ -1,6 +1,6 @@
 # Deploying a Neural Network Model with Flask
 
-This project demonstrates how to deploy a FastAI-based image classification model into a web application using Flask. The web application classifies uploaded images into one of four categories: Pigeon, Dog, Human, and Baby.
+This project demonstrates how to deploy a FastAI-based image classification model into a web application using Flask. The web application classifies uploaded images into one of four categories: Pigeon, Dog, Adult, and Baby.
 
 ## About the Project
 
@@ -16,7 +16,7 @@ The primary goal of this project is to show the process of integrating a machine
 
 ## How it Works
 
-The user uploads an image through the web interface. The image is then processed and fed into the neural network model. The model makes a prediction about the class of the image (Pigeon, Dog, Human, Baby, or Unknown if the confidence score is below a certain threshold). The prediction, along with the associated confidence score, is then displayed on the webpage.
+The user uploads an image through the web interface. The image is then processed and fed into the neural network model. The model makes a prediction about the class of the image (Pigeon, Dog, Adult, Baby, or Unknown if the confidence score is below a certain threshold). The prediction, along with the associated confidence score, is then displayed on the webpage.
 
 ## Contributing
 
